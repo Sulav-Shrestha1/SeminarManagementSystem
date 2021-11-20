@@ -1,0 +1,97 @@
+﻿@model IEnumerable<ManagementSystem.Model.AttendeeModel>
+
+@{
+    ViewBag.Title = "GetAllAttendee";
+}
+<link href="~/Content/AllRecords.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="~/Content/sweetalert/sweet-alert.css" rel="stylesheet" />
+
+<h2>List Of All Attendee</h2>
+
+<p>
+    @Html.ActionLink("Create New Attendee", "Create")
+</p>
+<table class="content-table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AttendeeID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfBirth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Occupation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsAvailable)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+
+    @foreach (var item in Model)
+    {
+        <tr class="active-row">
+            <td>
+                @Html.DisplayFor(modelItem => item.AttendeeID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfBirth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Occupation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsAvailable)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.AttendeeID }, new { onClick = "return confirm('Are you sure you want to edit?');" }) |
+                @Html.ActionLink("Details", "Details", new { id = item.AttendeeID }) |
+                @Html.ActionLink("Delete", "Delete", new { @class = "Delete", id = item.AttendeeID }, new { onClick = "return confirm('Are you sure you want to delete this?');" })
+            </td>
+        </tr>
+    }
+
+
+</table>
+@Html.Raw(TempData["msg"])
+<script>
+    $(document).ready(function () {
+        $(".Delete").click(function () {
+            alert('Data Successfully Deleted');
+        });
+    });
+</script>
+

@@ -1,0 +1,80 @@
+﻿@model ManagementSystem.Model.OrganizerModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<link href="~/Content/Details.css" rel="stylesheet" />
+<style>
+    dt {
+        width: 180px;
+    }
+
+    dd {
+        padding-top: 3px;
+        padding-bottom: 25.5px;
+    }
+    footer {
+        top: 660px;
+    }
+</style>
+
+<h2>Organizer Details</h2>
+<div>
+    <h4>Organizer Model</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OrganizerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrganizerID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrganizerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrganizerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrganizerEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrganizerEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrganizerAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrganizerAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrganizerPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrganizerPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsAvailable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsAvailable)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.OrganizerID }, new { onClick = "return confirm('Are you sure you want to edit?');" }) |
+    @Html.ActionLink("Back to List", "GetAllOrganizer")
+</p>

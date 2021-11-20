@@ -1,0 +1,135 @@
+﻿* {
+    font-family: sans-serif;
+}
+h2 {
+    
+    font-size: 1.8rem;
+    font-weight: 400 bold;
+    text-transform: capitalize;
+    line-height: 3rem;
+    margin: 2px;
+}
+
+h4 {
+    font-size: 1.5rem;
+    font-weight: 200;
+    text-transform: capitalize;
+    line-height: 2rem;
+    margin: 2px;
+}
+
+.form-group {
+    padding: 12px 0 12px 0;
+    margin: 12px 0 12px 0;
+    
+}
+
+.control-label.col-md-2 {
+    float: left;
+    clear: left;
+    width: 123px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.form-control {
+    margin: 0px 0 0 70px;
+    padding: 10px 20px 0.7em 10px;
+    height: 40px;
+    width: 180px;
+    display: inline-block;
+    border: 2px solid #787474;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+
+
+
+.form-control:focus, #Password:focus, #IsAvailable:focus {
+    display: inline-block;
+    box-sizing: border-box;
+    border: 2px solid #000000;
+    border-radius: 6px;
+}
+
+.btn {
+    position: relative;
+    background-color: #004580;
+    border: none;
+    font-size: 25px;
+    color: #FFFFFF;
+    padding: 20px;
+    width: 125px;
+    text-align: center;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.btn:after {
+    content: "";
+    background: #90EE90;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s;
+}
+
+.btn:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s;
+}
+
+.btn:hover {
+    font-size: 30px;
+    transition: 0.6s;
+    background: #c40010;
+}
+
+#IsAvailable,#Password {
+    margin: 0px 0 0 70px;
+    padding: 10px 20px 0.7em 10px;
+    height: 40px;
+    width: 180px;
+    display: inline-block;
+    border: 2px solid #787474;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+input {
+    width: 100%;
+}
+
+a {
+    color: #0000EE;
+    font-size: 0.9em;
+    font-weight: bold;
+    padding: 7px 13px;
+    border-radius: 3px;
+    border: 1px solid transparent;
+}
+
+a.active, a:hover{
+    background: #004580;
+    color: white;
+    transition: .5s;
+}
+
+a:hover {
+    color: white;
+    transition: .5s;
+}
+
+.text-danger {
+    color: red;
+}

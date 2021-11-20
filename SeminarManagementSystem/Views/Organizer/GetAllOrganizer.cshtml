@@ -1,0 +1,77 @@
+﻿@model IEnumerable<ManagementSystem.Model.OrganizerModel>
+
+@{
+    ViewBag.Title = "GetAllOrganizer";
+}
+<link href="~/Content/AllRecords.css" rel="stylesheet" />
+<h2>List Of All Organizer</h2>
+
+<p>
+    @Html.ActionLink("Create New Organizer", "Create")
+</p>
+<table class="content-table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrganizerID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrganizerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrganizerEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrganizerAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrganizerPhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsAvailable)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrganizerID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrganizerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrganizerEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrganizerAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrganizerPhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsAvailable)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.OrganizerID }, new { onClick = "return confirm('Are you sure you want to edit?');" }) |
+                @Html.ActionLink("Details", "Details", new { id = item.OrganizerID }) |
+                @Html.ActionLink("Delete", "Delete", new { @class = "Delete", id = item.OrganizerID }, new { onClick = "return confirm('Are you sure you want to delete this?');" })
+            </td>
+        </tr>
+    }
+
+
+</table>
+@Html.Raw(TempData["msg"])
+
+<script>
+    $(document).ready(function () {
+        $(".Delete").click(function () {
+            alert('Data Successfully Deleted');
+        });
+    });
+</script>

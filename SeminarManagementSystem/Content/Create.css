@@ -1,0 +1,111 @@
+﻿* {
+    font-family: sans-serif;
+}
+h2 {
+    
+    font-size: 1.8rem;
+    font-weight: 400 bold;
+    text-transform: capitalize;
+    line-height: 3rem;
+    margin: 2px;
+}
+
+h4 {
+    font-size: 1.5rem;
+    font-weight: 200;
+    text-transform: capitalize;
+    line-height: 2rem;
+    margin: 2px;
+}
+
+.form-group {
+    padding: 12px 0 12px 0;
+    margin: 12px 0 12px 0;
+    
+}
+
+.control-label.col-md-2 {
+    float: left;
+    clear: left;
+    width: 123px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.form-control {
+    margin: 0px 0 0 70px;
+    padding: 10px 20px 0.7em 10px;
+    height: 40px;
+    width: 180px;
+    display: inline-block;
+    border: 2px solid #787474;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.form-control:focus, #Gender:focus, #OrganizerID:focus, #SeminarID:focus, #AttendeeID:focus, #IsAvailable:focus {
+    display: inline-block;
+    box-sizing: border-box;
+    border: 2px solid #000000;
+    border-radius: 6px;
+}
+
+
+
+
+.btn {
+    position: relative;
+    background-color: #004580;
+    border: none;
+    font-size: 25px;
+    color: #FFFFFF;
+    padding: 20px;
+    width: 125px;
+    text-align: center;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.btn:after {
+    content: "";
+    background: #90EE90;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.btn:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s;
+}
+
+.btn:hover {
+    font-size: 30px;
+    color: black;
+    transition: 0.6s;
+    background: #90EE90;
+}
+
+#IsAvailable, #Gender, #OrganizerID, #SeminarID, #AttendeeID {
+    margin: 0px 0 0 70px;
+    padding: 10px 20px 0.7em 10px;
+    height: 40px;
+    width: 180px;
+    display: inline-block;
+    border: 2px solid #787474;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.text-danger {
+    color: red;
+}

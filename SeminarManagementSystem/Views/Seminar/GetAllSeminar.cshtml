@@ -1,0 +1,105 @@
+﻿@model IEnumerable<ManagementSystem.Model.SeminarModel>
+
+@{
+    ViewBag.Title = "GetAllSeminar";
+}
+<link href="~/Content/AllRecords.css" rel="stylesheet" />
+<h2>List Of All Seminar</h2>
+
+<p>
+    @Html.ActionLink("Create New Seminar", "Create")
+</p>
+<table class="content-table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SeminarID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SeminarTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SeminarTeacher)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SeminarRoom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SeminarDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SeminarStartTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SeminarEndTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SeminarDesc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SeminarType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsAvailable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Organizer.OrganizerName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SeminarID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SeminarTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SeminarTeacher)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SeminarRoom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SeminarDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SeminarStartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SeminarEndTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SeminarDesc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SeminarType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsAvailable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Organizer.OrganizerName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.SeminarID }, new { onClick = "return confirm('Are you sure you want to edit?');" }) |
+                @Html.ActionLink("Details", "Details", new { id = item.SeminarID }) |
+                @Html.ActionLink("Delete", "Delete", new { @class = "Delete", id = item.SeminarID }, new { onClick = "return confirm('Are you sure you want to delete this?');" })
+            </td>
+        </tr>
+    }
+
+
+</table>
+@Html.Raw(TempData["msg"])
+<script>
+    $(document).ready(function () {
+        $(".Delete").click(function () {
+            alert('Data Successfully Deleted');
+        });
+    });
+</script>

@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/Site.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+    <nav>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <a id="sunsari" aria-label="Sunsari College" href="https://stc.edu.np/">
+            <img alt="logo" src="/Imgs/stc-1.jpg">
+        </a>
+
+        <ul class="navmenu">
+            <li>
+                <a active="active" href="/Home/GetAllAttendee">Home</a>
+            </li>
+            <li>
+                <a href="/Seminar/GetAllSeminar">Seminar</a>
+            </li>
+            <li>
+                <a href="/Organizer/GetAllOrganizer">Organizer</a>
+            </li>
+            <li>
+                <a href="/Attendance/GetAllAttendance">Attendance</a>
+            </li>
+            <li>
+                <a href="/AboutUs/AboutUs">About</a>
+            </li>
+        </ul>
+
+    </nav>
+
+    <div class="container body-content">
+        @RenderBody()
+        <br />
+
+    </div>
+    <div class="footer-content">
+        <footer>
+            <div class="footer-content">
+                <h3>Sunsari College</h3>
+                <p>Sunsari Technical School (STS) now Sunsari Technical College(STC) located at Dharan and affiliated to T.U. and CTEVT was established in 2052 B.S. with the objective of providing quality technical education and vocational training. It has now been the best destination for the local as well as country-wide student ever since its establishment.</p>
+                <ul class="socials">
+                    <li><a aria-label="Facebook link of Sunsari Technical College" href="#"><i class="fa fa-facebook"></i></a></li>
+                    <li><a aria-label="Twitter link of Sunsari Technical College" href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li><a aria-label="Google Plus link of Sunsari Technical College" href="#"><i class="fa fa-google-plus"></i></a></li>
+                    <li><a aria-label="Youtube of link Sunsari Technical College" href="#"><i class="fa fa-youtube"></i></a></li>
+                    <li><a aria-label="Linkedin of link Sunsari Technical College" href="#"><i class="fa fa-linkedin-square"></i></a></li>
+                </ul>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </div>
+        </footer>
+    </div>
+
+    
+    <script type="text/javascript">
+        const currentLocation = location.href;
+        const menuItem = document.querySelectorAll('a');
+        const menuLength = menuItem.length;
+        for (let i = 0; i < menuLength; i++) {
+            if (menuItem[i].href === currentLocation) {
+                menuItem[i].className = "active"
+            }
+        }
+        $(document).ready(function () {
+            $('#icon').click(function () {
+                $('ul').toggleClass('show');
+            });
+        });
+    </script>
+
+
+</body>
+</html>

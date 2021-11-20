@@ -1,0 +1,62 @@
+﻿@model IEnumerable<ManagementSystem.Model.AttendanceModel>
+
+@{
+    ViewBag.Title = "GetAllAttendance";
+}
+
+<link href="~/Content/AllRecords.css" rel="stylesheet" />
+<h2>List Of All Attendance</h2>
+
+<p>
+    @Html.ActionLink("Create New Attendance", "Create")
+</p>
+<table class="content-table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AttendanceID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SeminarID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AttendeeID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsAvailable)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AttendanceID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Seminar.SeminarTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Attendee.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsAvailable)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.AttendanceID }, new { onClick = "return confirm('Are you sure you want to edit?');" }) |
+                @Html.ActionLink("Details", "Details", new { id = item.AttendanceID }) |
+                @Html.ActionLink("Delete", "Delete", new { @class = "Delete", id = item.AttendanceID }, new { onClick = "return confirm('Are you sure you want to delete this?');" })
+            </td>
+        </tr>
+    }
+
+</table>
+@Html.Raw(TempData["msg"])
+<script>
+    $(document).ready(function () {
+        $(".Delete").click(function () {
+            alert('Data Successfully Deleted');
+        });
+    });
+</script>

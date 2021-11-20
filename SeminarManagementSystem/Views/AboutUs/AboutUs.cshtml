@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "AboutUs";
+}
+<link href="~/Content/AboutUs.css" rel="stylesheet" />
+<style>
+    footer {
+        top: 892px;
+    }
+    .container {
+        float: left;
+        padding: 0px;
+        padding-top: 100px;
+    }
+</style>
+@using (Html.BeginForm())
+{
+    <div class="wrapper">
+        <div class="testimonial">
+            <article>
+                <h1>About Me</h1>
+                <img alt="Image" src="~/Imgs/front.jpg"/>
+                <blockquote>
+                    I am a highly Competent, Creative, Fast-Learner Computing Student with a proven track record in designing websites, networking and managing databases. I have strong technical skills as well as excellent interpersonal skills, enabling me to interact with a wide range of clients.
+                </blockquote>
+                <h5>Sulav Shrestha</h5>
+                <p> I am eager to be challenged in order to grow and further improve my IT skills. My greatest passion is in life is using my technical know-how to benefit other people and organisations.  </p>
+            </article>
+        </div>
+    </div>
+}

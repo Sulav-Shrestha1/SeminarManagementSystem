@@ -1,0 +1,342 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SeminarDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="AccountID" />
+          </Key>
+          <Property Name="AccountID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="IsAvailable" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Attendance">
+          <Key>
+            <PropertyRef Name="AttendanceID" />
+          </Key>
+          <Property Name="AttendanceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SeminarID" Type="int" Nullable="false" />
+          <Property Name="AttendeeID" Type="int" Nullable="false" />
+          <Property Name="IsAvailable" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Attendee">
+          <Key>
+            <PropertyRef Name="AttendeeID" />
+          </Key>
+          <Property Name="AttendeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="DateOfBirth" Type="datetime2" Precision="7" />
+          <Property Name="Email" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Occupation" Type="nvarchar" MaxLength="30" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="30" />
+          <Property Name="IsAvailable" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Organizer">
+          <Key>
+            <PropertyRef Name="OrganizerID" />
+          </Key>
+          <Property Name="OrganizerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrganizerName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="OrganizerEmail" Type="nvarchar" MaxLength="30" />
+          <Property Name="OrganizerAddress" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="OrganizerPhone" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="IsAvailable" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Seminar">
+          <Key>
+            <PropertyRef Name="SeminarID" />
+          </Key>
+          <Property Name="SeminarID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SeminarTitle" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="SeminarTeacher" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="SeminarRoom" Type="nchar" MaxLength="10" />
+          <Property Name="SeminarDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="SeminarStartTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="SeminarEndTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="SeminarDesc" Type="nvarchar(max)" />
+          <Property Name="SeminarType" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="IsAvailable" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="OrganizerID" Type="int" />
+        </EntityType>
+        <Association Name="AttendeeID">
+          <End Role="Attendee" Type="Self.Attendee" Multiplicity="1" />
+          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attendee">
+              <PropertyRef Name="AttendeeID" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="AttendeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Seminar_ToTable">
+          <End Role="Organizer" Type="Self.Organizer" Multiplicity="0..1" />
+          <End Role="Seminar" Type="Self.Seminar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organizer">
+              <PropertyRef Name="OrganizerID" />
+            </Principal>
+            <Dependent Role="Seminar">
+              <PropertyRef Name="OrganizerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SeminarID">
+          <End Role="Seminar" Type="Self.Seminar" Multiplicity="1" />
+          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seminar">
+              <PropertyRef Name="SeminarID" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="SeminarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SeminarDBModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Attendee" EntityType="Self.Attendee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Organizer" EntityType="Self.Organizer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Seminar" EntityType="Self.Seminar" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="AttendeeID" Association="Self.AttendeeID">
+            <End Role="Attendee" EntitySet="Attendee" />
+            <End Role="Attendance" EntitySet="Attendance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Seminar_ToTable" Association="Self.FK_Seminar_ToTable">
+            <End Role="Organizer" EntitySet="Organizer" />
+            <End Role="Seminar" EntitySet="Seminar" />
+          </AssociationSet>
+          <AssociationSet Name="SeminarID" Association="Self.SeminarID">
+            <End Role="Seminar" EntitySet="Seminar" />
+            <End Role="Attendance" EntitySet="Attendance" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SeminarDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="AccountID" />
+          </Key>
+          <Property Name="AccountID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsAvailable" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Attendance">
+          <Key>
+            <PropertyRef Name="AttendanceID" />
+          </Key>
+          <Property Name="AttendanceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SeminarID" Type="Int32" Nullable="false" />
+          <Property Name="AttendeeID" Type="Int32" Nullable="false" />
+          <Property Name="IsAvailable" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Attendee" Relationship="Self.AttendeeID" FromRole="Attendance" ToRole="Attendee" />
+          <NavigationProperty Name="Seminar" Relationship="Self.SeminarID" FromRole="Attendance" ToRole="Seminar" />
+        </EntityType>
+        <EntityType Name="Attendee">
+          <Key>
+            <PropertyRef Name="AttendeeID" />
+          </Key>
+          <Property Name="AttendeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="7" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Occupation" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="IsAvailable" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Attendance" Relationship="Self.AttendeeID" FromRole="Attendee" ToRole="Attendance" />
+        </EntityType>
+        <EntityType Name="Organizer">
+          <Key>
+            <PropertyRef Name="OrganizerID" />
+          </Key>
+          <Property Name="OrganizerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrganizerName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OrganizerEmail" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="OrganizerAddress" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OrganizerPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsAvailable" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Seminar" Relationship="SeminarDBModel.FK_Seminar_ToTable" FromRole="Organizer" ToRole="Seminar" />
+        </EntityType>
+        <EntityType Name="Seminar">
+          <Key>
+            <PropertyRef Name="SeminarID" />
+          </Key>
+          <Property Name="SeminarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SeminarTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SeminarTeacher" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SeminarRoom" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="SeminarDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="SeminarStartTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="SeminarEndTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="SeminarDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SeminarType" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsAvailable" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Attendance" Relationship="Self.SeminarID" FromRole="Seminar" ToRole="Attendance" />
+          <Property Name="OrganizerID" Type="Int32" />
+          <NavigationProperty Name="Organizer" Relationship="SeminarDBModel.FK_Seminar_ToTable" FromRole="Seminar" ToRole="Organizer" />
+        </EntityType>
+        <Association Name="AttendeeID">
+          <End Role="Attendee" Type="Self.Attendee" Multiplicity="1" />
+          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attendee">
+              <PropertyRef Name="AttendeeID" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="AttendeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SeminarID">
+          <End Role="Seminar" Type="Self.Seminar" Multiplicity="1" />
+          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seminar">
+              <PropertyRef Name="SeminarID" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="SeminarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SeminarDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Account" EntityType="Self.Account" />
+          <EntitySet Name="Attendance" EntityType="Self.Attendance" />
+          <EntitySet Name="Attendee" EntityType="Self.Attendee" />
+          <EntitySet Name="Organizer" EntityType="Self.Organizer" />
+          <EntitySet Name="Seminar" EntityType="Self.Seminar" />
+          <AssociationSet Name="AttendeeID" Association="Self.AttendeeID">
+            <End Role="Attendee" EntitySet="Attendee" />
+            <End Role="Attendance" EntitySet="Attendance" />
+          </AssociationSet>
+          <AssociationSet Name="SeminarID" Association="Self.SeminarID">
+            <End Role="Seminar" EntitySet="Seminar" />
+            <End Role="Attendance" EntitySet="Attendance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Seminar_ToTable" Association="SeminarDBModel.FK_Seminar_ToTable">
+            <End Role="Organizer" EntitySet="Organizer" />
+            <End Role="Seminar" EntitySet="Seminar" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_Seminar_ToTable">
+          <End Type="SeminarDBModel.Organizer" Role="Organizer" Multiplicity="0..1" />
+          <End Type="SeminarDBModel.Seminar" Role="Seminar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organizer">
+              <PropertyRef Name="OrganizerID" />
+            </Principal>
+            <Dependent Role="Seminar">
+              <PropertyRef Name="OrganizerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SeminarDBModelStoreContainer" CdmEntityContainer="SeminarDBEntities">
+          <EntitySetMapping Name="Account">
+            <EntityTypeMapping TypeName="SeminarDBModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Attendance">
+            <EntityTypeMapping TypeName="SeminarDBModel.Attendance">
+              <MappingFragment StoreEntitySet="Attendance">
+                <ScalarProperty Name="AttendanceID" ColumnName="AttendanceID" />
+                <ScalarProperty Name="SeminarID" ColumnName="SeminarID" />
+                <ScalarProperty Name="AttendeeID" ColumnName="AttendeeID" />
+                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Attendee">
+            <EntityTypeMapping TypeName="SeminarDBModel.Attendee">
+              <MappingFragment StoreEntitySet="Attendee">
+                <ScalarProperty Name="AttendeeID" ColumnName="AttendeeID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Occupation" ColumnName="Occupation" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Organizer">
+            <EntityTypeMapping TypeName="SeminarDBModel.Organizer">
+              <MappingFragment StoreEntitySet="Organizer">
+                <ScalarProperty Name="OrganizerID" ColumnName="OrganizerID" />
+                <ScalarProperty Name="OrganizerName" ColumnName="OrganizerName" />
+                <ScalarProperty Name="OrganizerEmail" ColumnName="OrganizerEmail" />
+                <ScalarProperty Name="OrganizerAddress" ColumnName="OrganizerAddress" />
+                <ScalarProperty Name="OrganizerPhone" ColumnName="OrganizerPhone" />
+                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Seminar">
+            <EntityTypeMapping TypeName="SeminarDBModel.Seminar">
+              <MappingFragment StoreEntitySet="Seminar">
+                <ScalarProperty Name="OrganizerID" ColumnName="OrganizerID" />
+                <ScalarProperty Name="SeminarDate" ColumnName="SeminarDate" />
+                <ScalarProperty Name="SeminarStartTime" ColumnName="SeminarStartTime" />
+                <ScalarProperty Name="SeminarEndTime" ColumnName="SeminarEndTime" />
+                <ScalarProperty Name="SeminarID" ColumnName="SeminarID" />
+                <ScalarProperty Name="SeminarTitle" ColumnName="SeminarTitle" />
+                <ScalarProperty Name="SeminarTeacher" ColumnName="SeminarTeacher" />
+                <ScalarProperty Name="SeminarRoom" ColumnName="SeminarRoom" />
+                <ScalarProperty Name="SeminarDesc" ColumnName="SeminarDesc" />
+                <ScalarProperty Name="SeminarType" ColumnName="SeminarType" />
+                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

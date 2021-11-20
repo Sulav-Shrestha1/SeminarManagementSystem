@@ -1,0 +1,118 @@
+﻿@model ManagementSystem.Model.SeminarModel
+
+@{
+    ViewBag.Title = "Details";
+}
+<link href="~/Content/Details.css" rel="stylesheet" />
+<style>
+    dt{
+        width:180px;
+    }
+    dd {
+        padding-top: 3px;
+        padding-bottom: 25.5px;
+    }
+    footer {
+        top: 925px;
+    }
+</style>
+<h2>Seminar Details</h2>
+
+<div>
+    <h4>Seminar Model</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SeminarID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SeminarID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SeminarTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SeminarTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SeminarTeacher)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SeminarTeacher)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SeminarRoom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SeminarRoom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SeminarDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SeminarDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SeminarStartTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SeminarStartTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SeminarEndTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SeminarEndTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SeminarDesc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SeminarDesc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SeminarType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SeminarType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsAvailable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsAvailable)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Organizer.OrganizerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Organizer.OrganizerName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SeminarID }, new { onClick = "return confirm('Are you sure you want to edit?');" }) |
+    @Html.ActionLink("Back to List", "GetAllSeminar")
+</p>

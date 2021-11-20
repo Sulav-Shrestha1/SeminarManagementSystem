@@ -1,0 +1,70 @@
+﻿@model ManagementSystem.Model.AttendanceModel
+
+@{
+    ViewBag.Title = "Create";
+}
+<link href="~/Content/Create.css" rel="stylesheet" />
+<style>
+    footer {
+        top: 590px;
+    }
+</style>
+<h2>Create New Attendance</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Attendance Model</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SeminarID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.SeminarID, ViewBag.seminarList as SelectList, "--Select Seminar--", new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SeminarID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AttendeeID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.AttendeeID, ViewBag.attendeeList as SelectList, "--Select Attendee--", new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AttendeeID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsAvailable, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.IsAvailable, new SelectList(ViewBag.Availability), "--Select Availablility--", new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IsAvailable, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input onclick="myFunction()" type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+@Html.Raw(TempData["msg"])
+
+<script>
+    function myFunction() {
+        if (document.getElementById("SeminarID").value == "" ||
+            document.getElementById("AttendeeID").value == "" ||
+            document.getElementById("IsAvailable").value == "") {
+            alert('Empty Element Found, Data Not Inserted')
+        }
+    }
+</script>
+
+
+
+<div>
+    @Html.ActionLink("Back to List", "GetAllAttendance")
+</div>
